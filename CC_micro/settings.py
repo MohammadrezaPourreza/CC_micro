@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'user_panel.apps.UserPanelConfig',
+    'doctor_panel.apps.DoctorPanelConfig',
     'rest_framework',
 ]
 
