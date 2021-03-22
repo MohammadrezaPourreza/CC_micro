@@ -93,6 +93,14 @@ DATABASES = {
         'PASSWORD': 'sefteghoot',
         'HOST': '127.0.0.1',
         'PORT': 3306,
+    },
+    'doctors': {
+        'NAME': 'doctor_panel',
+        'ENGINE': 'django.db.backends.mysql',
+        'USER': 'root',
+        'PASSWORD': 'sefteghoot',
+        'HOST': '127.0.0.1',
+        'PORT': 3306,
     }
 }
 
