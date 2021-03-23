@@ -8,6 +8,11 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ['id', 'username', 'name', 'family_name', 'phone_number', 'email']
 
+class FreeTimesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = FreeTimes
+        fields = ['id','doctor_username','date','time','duration']
+
 class DoctorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Doctor

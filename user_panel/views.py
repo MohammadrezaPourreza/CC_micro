@@ -47,3 +47,22 @@ def get_doctor_list_by_city(request):
         return JsonResponse(serializer.data,safe=False,status=201)
     else:
         return HttpResponse(status=400)
+
+
+@csrf_exempt
+def get_doctor_freetimes(request):
+    if request.method == 'POST':
+        doctor = request.POST['doctor_username']
+        #acctualy we have to call doctor_panel api
+        dir_path = os.path.dirname(os.path.realpath(__file__))
+        json_data = open(dir_path + '/' + 'freeTimes.json')
+        data1 = json.load(json_data)
+        freeTimes_list = []
+        for data in data1:
+            if data['doctor_username'] == doctor:
+                freeTimes_list.append(data)
+        json_data.close()
+        serializer = FreeTimesSerializer(freeTimes_list, many=True)
+        return JsonResponse(serializer.data,safe=False,status=201)
+    else:
+        return HttpResponse(status=400)
