@@ -15,7 +15,7 @@ from user_panel.serializers import *
 @csrf_exempt
 def user_list(request):
     """
-    List all code snippets, or create a new snippet.
+    List all code users, or create a new user.
     """
     if request.method == 'GET':
         users = User.objects.all()
