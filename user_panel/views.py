@@ -9,8 +9,6 @@ from user_panel.serializers import *
 
 
 # Create your views here.
-def index(request):
-    return HttpResponse("Hello reza")
 
 @csrf_exempt
 def user_list(request):
