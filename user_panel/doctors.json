@@ -8,8 +8,8 @@
 	"clinic_address" : "mashhad,sajad",
 	"city" : "mashhad",
 	"medical_expertise" : "zanan",
-	"degree" : "professor",
-	"off_days": "shanbe",
+	"degree" :"professor",
+	"off_days": "shanbe"
 },
 {
 	"username" : "pezeshkreza",
@@ -21,7 +21,7 @@
 	"city" : "tehran",
 	"medical_expertise" : "orolozhy",
 	"degree" : "professor",
-	"off_days": "3shanbe",
+	"off_days": "3shanbe"
 },
 {
 	"username" : "pezeshkmosi",
@@ -29,11 +29,11 @@
 	"family_name" : "hossein",
 	"phone_number" : 12334412,
 	"medical_association_id" : 5244052,
-	"clinic_address" : "mashhad,sajad",
+	"clinic_address" : "mashhad,saja",
 	"city" : "mashhad",
 	"medical_expertise" : "zanan",
 	"degree" : "professor",
-	"off_days": "jome",
+	"off_days": "jome"
 },
 {
 	"username" : "pezeshk",
@@ -45,7 +45,7 @@
 	"city" : "tehran",
 	"medical_expertise" : "qalb",
 	"degree" : "professor",
-	"off_days": "shanbe",
+	"off_days":"shanbe"
 },
 {
 	"username" : "javad",
@@ -57,6 +57,6 @@
 	"city" : "mashhad",
 	"medical_expertise" : "ortoped",
 	"degree" : "professor",
-	"off_days": "yek shanbe",
-},
+	"off_days": "yek shanbe"
+}
 ]

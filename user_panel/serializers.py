@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from user_panel.models import *
+from doctor_panel.models import *
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -7,6 +8,10 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ['id', 'username', 'name', 'family_name', 'phone_number', 'email']
 
+class DoctorSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Doctor
+        fields = ['id', 'username', 'name', 'family_name', 'phone_number', 'medical_association_id','clinic_address','city','medical_expertise','degree','off_days','opening_time','closing_time']
 
 class FavoriteDoctorSerializer(serializers.ModelSerializer):
     class Meta:
