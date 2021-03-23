@@ -22,8 +22,8 @@ class FavoriteDoctor(models.Model):
 class Comments(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     doctor_id = models.ForeignKey(doctor_panel.models.Doctor, on_delete=models.CASCADE)
-    commment = models.TextField()
-    commment_date = models.DateTimeField()
+    comment = models.TextField()
+    comment_date = models.DateTimeField()
 
 
 class Reservation(models.Model):
