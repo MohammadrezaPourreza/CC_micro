@@ -43,7 +43,7 @@ def get_doctor_list_by_city(request):
             if data['city'] == city:
                 doctors_list.append(data)
         json_data.close()
-        json_string = json.dumps(doctors_list)
-        return HttpResponse(json_string,status=201)
+        serializer = DoctorSerializer(doctors_list, many=True)
+        return JsonResponse(serializer.data,safe=False,status=201)
     else:
         return HttpResponse(status=400)
