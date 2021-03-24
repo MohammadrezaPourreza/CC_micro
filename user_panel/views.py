@@ -139,3 +139,25 @@ def edit_user(request):
             return HttpResponse(status=400)
     else:
         return HttpResponse(status=400)
+
+
+@csrf_exempt
+def search_doctor_advanced(request):
+    if request.method == 'GET':
+        if request.GET['city'] is not None:
+            city = request.GET['city']
+        if request.GET['medical_expertise'] is not None:
+            medical_expertise = request.GET['medical_expertise']
+        if request.GET['degree'] is not None:
+            degree = request.GET['degree']
+    #     actually we should use doctor service api
+        dir_path = os.path.dirname(os.path.realpath(__file__))
+        json_data = open(dir_path + '/' + 'doctors.json')
+        data = json.load(json_data)
+        doctors_list = []
+        for doc in data:
+            if request.GET['city'] is not None:
+                pass
+    #         TODO must complete
+    else:
+        return HttpResponse(status=400)
