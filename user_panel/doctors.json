@@ -44,7 +44,7 @@
 	"clinic_address" : "mashhad,sajad",
 	"city" : "tehran",
 	"medical_expertise" : "qalb",
-	"degree" : "professor",
+	"degree" : "PHD",
 	"off_days":"shanbe"
 },
 {
@@ -57,6 +57,18 @@
 	"city" : "mashhad",
 	"medical_expertise" : "ortoped",
 	"degree" : "professor",
+	"off_days": "yek shanbe"
+},
+{
+	"username" : "seyed",
+	"name" : "seyed abbas",
+	"family_name" : "posury",
+	"phone_number" : 12113344,
+	"medical_association_id" : 5249052,
+	"clinic_address" : "mashhad,sajad",
+	"city" : "mashhad",
+	"medical_expertise" : "ortoped",
+	"degree" : "PHD",
 	"off_days": "yek shanbe"
 }
 ]
