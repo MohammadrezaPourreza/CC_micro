@@ -9,6 +9,7 @@ import json
 import os
 from user_panel.serializers import *
 import traceback
+import datetime
 
 
 # Create your views here.
@@ -120,7 +121,6 @@ def edit_user(request):
 
     if request.method == 'POST':
         data = JSONParser().parse(request)
-        print(data)
         user = User.objects.get(username=data['username'])
         try:
             if data['name']:
@@ -184,5 +184,35 @@ def search_doctor_advanced(request):
         json_data.close()
         serializer = DoctorSerializer(doctors_list, many=True)
         return JsonResponse(serializer.data, safe=False, status=201)
+    else:
+        return HttpResponse(status=400)
+
+
+@csrf_exempt
+def reserve(request):
+    if request.method == 'POST':
+        reserve_req = JSONParser().parse(request)
+        dir_path = os.path.dirname(os.path.realpath(__file__))
+        json_data = open(dir_path + '/' + 'freeTimes.json')
+        data = json.load(json_data)
+        for item in data:
+            if item['doctor_username'] == reserve_req['doctor_username']:
+                if item['date'] == reserve_req['date']:
+                    if item['time'] == reserve_req['time']:
+                        if item['duration'] == reserve_req['duration']:
+                            # bayad az table e free time pak beshe
+                            # bayad be table e reservation ezafe beshe
+                            # ama chon table haye doc ro nadarim va foregin key darim nemishe
+                            date_time = datetime.datetime.now()
+                            reservation = {'doctor_id': reserve_req['doctor_username'],
+                                           'user_id': reserve_req['user_username'],
+                                           'reservation_date': reserve_req['date'].replace('/', '-') + ' '
+                                                               + reserve_req['time'],
+                                           'submit_date': datetime.datetime.strftime(date_time, '%Y-%m-%d %H:%M:%S'),
+                                           'is_paid': False}
+                            return JsonResponse(reservation, safe=False, status=201)
+            else:
+                # TODO mishe bishtar user friendly bashe
+                HttpResponse(status=404)
     else:
         return HttpResponse(status=400)

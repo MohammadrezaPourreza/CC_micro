@@ -11,4 +11,6 @@ urlpatterns = [
          name='find_doctor_by_name_or_medicalId'),
     path('edit-user/', views.edit_user, name='edit_user'),
     path('search-doctor-advanced/', views.search_doctor_advanced, name='search_doctor_advanced'),
+    path('reserve/', views.reserve, name='reserve')
+
 ]
