@@ -200,19 +200,78 @@ def reserve(request):
                 if item['date'] == reserve_req['date']:
                     if item['time'] == reserve_req['time']:
                         if item['duration'] == reserve_req['duration']:
-                            # bayad az table e free time pak beshe
+                            # bayad az table e free time pak beshe (ke daste ma nist)
                             # bayad be table e reservation ezafe beshe
                             # ama chon table haye doc ro nadarim va foregin key darim nemishe
                             date_time = datetime.datetime.now()
-                            reservation = {'doctor_id': reserve_req['doctor_username'],
-                                           'user_id': reserve_req['user_username'],
+                            doctor = Doctor.objects.get(username=reserve_req['doctor_username'])
+                            user = User.objects.get(username=reserve_req['user_username'])
+                            reservation = {'doctor_id': doctor.id,
+                                           'user_id': user.id,
                                            'reservation_date': reserve_req['date'].replace('/', '-') + ' '
                                                                + reserve_req['time'],
                                            'submit_date': datetime.datetime.strftime(date_time, '%Y-%m-%d %H:%M:%S'),
                                            'is_paid': False}
+                            reserve_model = Reservation.objects.create(doctor_id=doctor, user_id=user,
+                                                                       reservation_date=reservation['reservation_date'],
+                                                                       submit_date=reservation['submit_date'],
+                                                                       is_paid=False)
+                            reserve_model.save()
+
                             return JsonResponse(reservation, safe=False, status=201)
             else:
                 # TODO mishe bishtar user friendly bashe
                 HttpResponse(status=404)
+    else:
+        return HttpResponse(status=400)
+
+@csrf_exempt
+def doctor_comments(request):
+    if request.method == 'GET':
+        doctor = Doctor.objects.get(username=request.GET['username'])
+        comments = Comments.objects.filter(doctor_id=doctor)
+        if comments.count() > 1:
+            ser = CommentsSerializer(comments, many=True)
+            return JsonResponse(ser.data, safe=False, status=201)
+        else:
+            ser = CommentsSerializer(comments, many=False)
+            return JsonResponse(ser.data, safe=False, status=201)
+    else:
+        return HttpResponse(status=400)
+
+
+@csrf_exempt
+def add_favorite_doctor(request):
+    if request.method == 'POST':
+        req = JSONParser().parse(request)
+        user = User.objects.get(username=req['user_username'])
+        doctor = Doctor.objects.get(username=req['doctor_username'])
+        date_time = datetime.datetime.now()
+        submit_date = datetime.datetime.strftime(date_time, '%Y-%m-%d')
+        fav_doc = FavoriteDoctor.objects.create(user_id=user, doctor_id=doctor, add_date=submit_date)
+        fav_doc.save()
+        response = {
+            'user': req['user_username'],
+            ' doctor': req['doctor_username'],
+            'adding_date': submit_date
+        }
+        return JsonResponse(response, status=201)
+    else:
+        return HttpResponse(status=400)
+
+
+@csrf_exempt
+def favorite_doctors(request):
+    if request.method == 'GET':
+        user = User.objects.get(username=request.GET['username'])
+        favorite_docs = FavoriteDoctor.objects.filter(user_id=user)
+        if favorite_docs.count() > 1:
+            ser = FavoriteDoctorSerializer(favorite_docs, many=True)
+            return JsonResponse(ser.data, status=201, safe=False)
+        elif favorite_docs == 1:
+            ser = FavoriteDoctorSerializer(favorite_docs, many=False, safe=False)
+            return JsonResponse(ser.data, status=201)
+        else:
+            return HttpResponse(status=404)
     else:
         return HttpResponse(status=400)
