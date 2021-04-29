@@ -1,25 +1,27 @@
-version: '3'
+version: "3.9"
 
 services:
   db:
-    image: mysql:latest
-    restart: always
-    ports:
-      - '3306:3306'
+    image: postgres
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
     environment:
-      MYSQL_DATABASE: 'user_panel'
-      MYSQL_USER: 'root'
-      MYSQL_PASSWORD: 'password'
-      MYSQL_ROOT_PASSWORD: 'password'
-      MYSQL_HOST: ''
-    expose:
-      - "3306"
+      - POSTGRES_DB=user_panel
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
   web:
     build: .
-    command: python manage.py runserver 0.0.0.0:8000
+    tty: true
+    restart: always
+    command: >
+      bash -c " python manage.py makemigrations
+      && python manage.py migrate
+      && python manage.py runserver 0.0.0.0:8000"
     volumes:
-      - .:/my_app_dir
+      - .:/code
     ports:
-    - 8000:8000
-    depends_on:
-      - db
+      - "8000:8000"
+#    depends_on:
+#      - db
+#    links:
+#      - db
