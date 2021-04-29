@@ -90,18 +90,10 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'user_panel',
         'USER': 'root',
-        'PASSWORD': 'Kholmed@ng98',
-        'HOST': '127.0.0.1',
+        'PASSWORD': 'password',
+        'HOST': 'db',
         'PORT': 3306,
     },
-    'doctors': {
-        'NAME': 'doctor_panel',
-        'ENGINE': 'django.db.backends.mysql',
-        'USER': 'root',
-        'PASSWORD': 'sefteghoot',
-        'HOST': '127.0.0.1',
-        'PORT': 3306,
-    }
 }
 
 
