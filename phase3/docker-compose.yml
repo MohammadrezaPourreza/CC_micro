@@ -1,0 +1,16 @@
+version: "3.9"
+
+services:
+  authentication:
+    image: sajadkh/doctor_system_authentication
+    ports:
+      - "8000:8000"
+  patient_panel:
+    image: sajadkh/doctor_system_patient_panel
+    ports:
+      - "8002:8002"
+  doctor_panel:
+    image: sajadkh/doctor_system_doctor_panel
+    ports:
+      - "8001:8001"
+
