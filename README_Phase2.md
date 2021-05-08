@@ -7,5 +7,5 @@
 3)docker-compose up db
 4)docker-compose run web
 توجه کنید که برای ران شدن بر روی ویندوز به جای دستور 4 عم باید دستور زیر را بزنید
-docker-compose --service-ports run web
+docker-compose run --service-ports web
 
